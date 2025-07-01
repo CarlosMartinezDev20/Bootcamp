@@ -1,0 +1,8 @@
+.bg-secondary{
+    background-color: rgb(143, 143, 143) !important;
+}
+
+.btn-primary{
+    background-color: blueviolet !important;
+    box-shadow: 0 0 0.8rem rgb(165, 135, 193) !important;
+}

@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --primary-color: #e67451;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: gray;
+    background-image: url(../assets/images/background-adare-restaurant.jpg);
+    background-size: cover;
+}
+
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80vw;
+    text-align: center;
+}
+
+.container .header {
+    text-align: center;
+    height: 20vh;
+}
+
+.container .header .img-container {
+    height: 12vh;
+    display: flex;
+    justify-content: center;
+}
+
+.container .header .img-container .img-logo {
+    height: 10vh;
+}
+
+.container .header .navbar {
+    display: flex;
+    justify-content: space-between;
+    width: 48vw;
+    margin: 0 auto;
+}
+
+.container .header .navbar .nav-item {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+    transition: all 0.3s ease;
+}
+
+.container .header .navbar .nav-item:hover {
+    /* Utilizando de keyframes
+    animation: navItemHover 0.3s forwards; */
+    color: var(--primary-color);
+    font-size: 1.4em;
+    text-decoration: underline;
+}
+
+/* @keyframes navItemHover {
+    to {
+        color: var(--primary-color);
+        font-size: 1.4em;
+        text-decoration: underline;
+    }
+} */
+
+.container .main-container {
+    margin-top: 5vh;
+}
+
+.container .main-container .main-text-container {
+    color: white;
+    padding: 2rem;
+}
+
+.container .main-container .main-text-container .main-text {
+    font-family: 'Anton', sans-serif;
+    font-size: 3em;
+    transition: all 0.3s;
+}
+
+.container .main-container .main-text-container .main-text:hover {
+    text-shadow: 0.05em 0.05em var(--primary-color);
+}
+
+.container .main-container .main-text-container article {
+    margin: 0 auto;
+    max-width: 40vw;
+}
+
+.container .main-container .main-text-container article p {
+    color: rgb(152, 150, 150);
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1em;
+}
+
+.container .main-container .main-text-container article p strong a {
+    text-decoration: none;
+    color: white;
+    text-shadow: 0.05em 0.05em #e67451;
+}
+
+.container .main-container .maps .maps-container {
+    height: 50vh;
+    width: 60vw;
+}
+
+
+.container .footer {
+    color: white;
+}
+
+.container .footer .h4 {
+    font-size: 1.1em;
+}
