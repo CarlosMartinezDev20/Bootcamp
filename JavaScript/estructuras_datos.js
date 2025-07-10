@@ -93,3 +93,74 @@ programador.correr();
 //Encapsulamiento --> Limitar el acceso a la informacion de una clase -> modificadores de acceso: public, protected y private
 //Abstraccion --> Nos da herramientas o metodos para acceder a informacion encapsulada getters y setters
 
+//Arrays --> Estructura de datos que permite almacenar varios valores en una sola variable
+//Array indexado --> ordena el indice 0 en adelante
+let arraysito = [1, 2, 3, 4, 5];
+
+console.log(arraysito);
+
+//Array asociativo --> no ordena el indice, se accede por clave
+let arrayAsociativo = {
+    "nombre": "Carlos",
+    "edad": 25,
+    "lenguajes": ["JavaScript", "Python", "Java"]
+};
+
+console.log(arrayAsociativo["nombre"]); //accedemos al valor de la clave nombre
+
+//Array multidimensional --> array dentro de otro array
+//creamos un array de varias dimensiones, array dentro de otro array
+let arraycitoMulti = [ [1, 2], [{nombre: "Carlos"}] ];
+console.log(arraycitoMulti);
+
+//Accedemos a la pocision 0 primera
+let cajaDeIndiceCero = arraycitoMulti[0];
+console.log(cajaDeIndiceCero[1]); 
+
+//Accedemos a la pocision 1 
+let cajaDeIndiceUno = arraycitoMulti[1];
+//accedemos al objeto dentro del array
+console.log(cajaDeIndiceUno[0]);
+
+//Estos muestran el nombre
+console.log(cajaDeIndiceUno[0].nombre); //accedemos al valor de la clave nombre del objeto dentro del array
+console.log(arraycitoMulti[1][0].nombre); //accedemos al valor de la clave nombre del objeto dentro del array
+
+//metodos de arrays
+//Recorrer un array 
+// let nombres = ["Carlos", "Ana", "Pedro", "Maria"];
+
+//forEach --> recorre el array y nos deja utilizar la posicion y el indice del array
+//callback --> funcion que se ejecuta dentro de otra funcion
+nombres.forEach((value, index)  => {
+    console.log(value);
+    console.log(index);
+})
+
+let nombresAlReves = nombres.reverse(); //invierte el orden del array
+nombresAlReves.forEach((value, index)  => {
+    console.log(value);
+    console.log(index);
+})
+
+// for (let nombre of nombres) {
+//     console.log(nombre);
+// }
+
+//Metodos utiles
+//Map --> Recorre el array y nos retorna algo por cada posicion --> transformar valores
+let nombres = ["Carlos", "Ana", "Pedro", "Maria"];
+const nombresMayus = nombres.map((value) => {
+    //funcion flecha al poner llaves tenemos que retornar el valor
+    //si no ponemos llaves, se retorna automaticamente el valor de la funcion flecha
+
+    value.toUpperCase(); //transforma el valor a mayusculas
+    return value.toUpperCase(); //retorna el valor transformado
+})
+console.log(nombresMayus);  
+
+let numeros = [1, 2, 3, 4, 5];
+let numeritosPorDos = numeros.map((value) => {
+    return value * 2; //multiplica cada valor por 2
+})
+console.log(numeritosPorDos); // [2, 4, 6, 8, 10]
