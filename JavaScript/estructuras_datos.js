@@ -49,9 +49,9 @@ class Persona {
         console.log(this.nombre + " esta corriendo");
     }
 }
-let personita = new Persona("Carlos",20); //instancia de la clase Persona
+let personita = new Persona("Carlos", 20); //instancia de la clase Persona
 let personita2 = new Persona("Ana", 30); //otra instancia de la clase Persona
-console.log(personita); 
+console.log(personita);
 console.log(personita2);
 
 personita.correr(); //llamamos al metodo correr del objeto personita
@@ -64,19 +64,19 @@ personita.correr(); //llamamos al metodo correr del objeto personita
 //Polimorfismo --> Cambiar el comportamiento de un metodo del padre en la clase hija
 
 //Herencia palabra reservada extend
-class Programador extends Persona{
-    constructor(nombreParam, edadParam, lenguajesParam){
+class Programador extends Persona {
+    constructor(nombreParam, edadParam, lenguajesParam) {
         //seguir usando las propiedades del padre
         super(nombreParam, edadParam);
         this.lenguajesParam = lenguajesParam;
 
     }
-    codear(){
+    codear() {
         console.log("Estoy codeando");
     }
 
     //polimorfismo
-    correr(){
+    correr() {
         // super.correr();
         console.log("No corro tan rapido pero puedo trotar");
     }
@@ -110,12 +110,12 @@ console.log(arrayAsociativo["nombre"]); //accedemos al valor de la clave nombre
 
 //Array multidimensional --> array dentro de otro array
 //creamos un array de varias dimensiones, array dentro de otro array
-let arraycitoMulti = [ [1, 2], [{nombre: "Carlos"}] ];
+let arraycitoMulti = [[1, 2], [{ nombre: "Carlos" }]];
 console.log(arraycitoMulti);
 
 //Accedemos a la pocision 0 primera
 let cajaDeIndiceCero = arraycitoMulti[0];
-console.log(cajaDeIndiceCero[1]); 
+console.log(cajaDeIndiceCero[1]);
 
 //Accedemos a la pocision 1 
 let cajaDeIndiceUno = arraycitoMulti[1];
@@ -132,17 +132,24 @@ console.log(arraycitoMulti[1][0].nombre); //accedemos al valor de la clave nombr
 
 //forEach --> recorre el array y nos deja utilizar la posicion y el indice del array
 //callback --> funcion que se ejecuta dentro de otra funcion
-nombres.forEach((value, index)  => {
+nombres.forEach((value, index) => {
     console.log(value);
     console.log(index);
 })
 
 let nombresAlReves = nombres.reverse(); //invierte el orden del array
-nombresAlReves.forEach((value, index)  => {
+nombresAlReves.forEach((value, index) => {
     console.log(value);
     console.log(index);
 })
 
+//Foreach que recibe un array
+let arrayNum = [1, 2, 3, 4, 5];
+
+arrayNum.forEach((value, index, array) => {
+    arrayNum.pop(); //elimina el ultimo elemento del array
+    console.log(array);
+})
 // for (let nombre of nombres) {
 //     console.log(nombre);
 // }
@@ -157,10 +164,66 @@ const nombresMayus = nombres.map((value) => {
     value.toUpperCase(); //transforma el valor a mayusculas
     return value.toUpperCase(); //retorna el valor transformado
 })
-console.log(nombresMayus);  
+console.log(nombresMayus);
 
 let numeros = [1, 2, 3, 4, 5];
 let numeritosPorDos = numeros.map((value) => {
     return value * 2; //multiplica cada valor por 2
 })
 console.log(numeritosPorDos); // [2, 4, 6, 8, 10]
+
+//Filter --> Filtra la informacion de un array y nos retorna un nuevo array con los valores que cumplen una condicion
+const usuarios = [{
+    nombre: "Carlos",
+    edad: 20
+},
+{
+    nombre: "Ana",
+    edad: 22
+},
+{
+    nombre: "Pedro",
+    edad: 19
+},
+{
+    nombre: "Maria",
+    edad: 25
+}];
+
+const mayoresDe21 = usuarios.filter((usuario) => {
+    return usuario.edad > 21 ; //filtra los usuarios mayores de 21 años
+});
+console.log(mayoresDe21); 
+
+//Find --> Busca un valor en un array y nos retorna el primer valor que cumple la condicion
+const usuarioCarlos= usuarios.find((usuario) => {
+    return usuario.nombre === "Carlos"; //busca el usuario con nombre Ana
+});
+console.log(usuarioCarlos); 
+
+//METODOS OBLIGATORIOS
+let array = [];
+//Agregar datos al array
+//AL FINAL
+array.push(2); //Agregar un elemento al final del array
+
+//PRIMERA POSICION
+array.unshift(1); //Agregar un elemento al inicio del array
+//Eliminar datos del array
+array.pop(); //Eliminar el ultimo elemento del array
+
+array.shift(); //Eliminar el primer elemento del array  
+
+console.log(array);
+
+//Obtener el largo del array
+let largo = array.length; //Obtener la cantidad de elementos del array
+console.log(array.length); //Muestra la cantidad de elementos del array
+
+//Strings
+console.log("Hola".length); //Muestra la cantidad de caracteres de la cadena de texto "Hola"
+
+//metodo para eliminar espacios al inicio y al final de un string
+let sinEspacios = " Hola Mundo ".trim(); //Elimina los espacios al inicio y al final de la cadena de texto"
+console.log(sinEspacios); 
+console.log(sinEspacios.length);
