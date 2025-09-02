@@ -1,3 +1,4 @@
+import { LoginComponent } from "./components/LoginComponent"
 import { RegisterComponent } from "./components/RegisterComponent"
 
 //rafc
@@ -6,6 +7,7 @@ export const SessionView = () => {
     <div>
     Session
     <RegisterComponent />
+    <LoginComponent />
     </div>
   )
 }

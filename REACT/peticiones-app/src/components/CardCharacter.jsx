@@ -25,7 +25,7 @@ const findCharacterInFavorites = () => {
 //console.log(listFavorites);
   return (
     <div>
-        <div className="card" style={{height: '38vh'}}>
+        <div className="card" style={{height: '42vh'}}>
   <img src={image} className="card-img-top" alt="image-character" />
   <div className="card-body">
     <h5 className="card-title">{name}</h5>
