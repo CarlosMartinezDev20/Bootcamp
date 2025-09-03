@@ -69,7 +69,7 @@ export const RegisterComponent = () => {
       <label className="form-label">Confirm Password: </label>
       <input type="password" className="form-control" {...register('confirm_password')}/>
       <p className='text-danger'>{errors.confirm_password && errors.confirm_password.message }</p>
-      <button type="submit">Send</button>
+      <button type="submit" className='btn btn-success'>Send</button>
     </form>
     </div>
   )
