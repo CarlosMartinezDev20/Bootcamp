@@ -1,76 +1,111 @@
-import {useForm} from 'react-hook-form'
+// src/views/Login/RegisterComponent.jsx
+import { useState } from 'react'
+import { useNavigate, Link } from 'react-router'
+import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
-import { yupResolver } from "@hookform/resolvers/yup"
+import { yupResolver } from '@hookform/resolvers/yup'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '../../../repositories/firebase/config'
+import { auth } from '../../repositories/firebase/config'
 
 const schema = yup.object({
-  email: yup.string().email("Please enter a correct format: email@email.com").required(),
-  password: yup.string().required().min(8,"Please enter a min 8 char")
-  .matches(/[A-Z]/,'Please enter a 1 char in Mayus')
-  .matches(/[a-z]/,'Please enter a 1 char in Minus')
-  .matches(/[0-9]/,'Please enter a 1 number')
-  .matches(/[!@#$%&*?.,_:<>"|]/,'Please enter a 1 special char'),
-  confirm_password: yup.string().oneOf([yup.ref("password"),null],'Check our password')
+  email: yup.string()
+    .email('Formato: nombre@dominio.com')
+    .required('Correo requerido'),
+  password: yup.string().required('Contraseña requerida')
+    .min(8, 'Mínimo 8 caracteres')
+    .matches(/[A-Z]/, 'Al menos 1 mayúscula')
+    .matches(/[a-z]/, 'Al menos 1 minúscula')
+    .matches(/[0-9]/, 'Al menos 1 número')
+    .matches(/[!@#$%&*?.,_:<>"|]/, 'Al menos 1 carácter especial'),
+  confirm_password: yup.string()
+    .oneOf([yup.ref('password'), null], 'Las contraseñas no coinciden')
+    .required('Confirma tu contraseña')
 })
 
+const mapAuthErr = (code) => ({
+  'auth/email-already-in-use': 'El correo ya está registrado',
+  'auth/invalid-email': 'Correo inválido',
+  'auth/weak-password': 'Contraseña débil',
+}[code] || 'No se pudo crear la cuenta')
 
-export const RegisterComponent = () => {
- const {register,handleSubmit,formState:{errors}} = useForm({
-    resolver: yupResolver(schema)
- })
+export default function RegisterComponent() {
+  const navigate = useNavigate()
+  const [authError, setAuthError] = useState('')
+  const { register, handleSubmit, formState:{ errors, isSubmitting } } =
+    useForm({ resolver: yupResolver(schema) })
 
- /* const [email,setEmail] = useState("");
-  const [password,setPassword] = useState("");
-  
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(e.target);
-    console.log(e.target.input_email.value);
-    console.log(e.target.input_password.value);
-    
-    console.log(email);
-    console.log(password);
-  } */
-
-  const onSubmitForm = (data) => {
-    console.log(data);
-    
-    createUserWithEmailAndPassword(auth, data.email, data.password)
-  .then((userCredential) => {
-    // Signed up 
-    const user = userCredential.user;
-    console.log(user);
-  
-    alert('User successfully registered')
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.error(errorCode);
-    console.log(errorMessage);
-    
-    // ..
-  });
-
+  const onSubmit = async ({ email, password }) => {
+    setAuthError('')
+    try {
+      await createUserWithEmailAndPassword(auth, email, password)
+      navigate('/dashboard', { replace: true })
+    } catch (e) {
+      console.error(e)
+      setAuthError(mapAuthErr(e.code))
+    }
   }
 
   return (
-    <div>Register
-    
-    <form onSubmit={handleSubmit(onSubmitForm)}>
-      <label className="form-label" >Email: </label>
-      <input type="email" className="form-control" name="input_email" {...register('email')} />
-      <p className='text-danger'>{errors.email && errors.email.message }</p>
-      <label className="form-label">Password: </label>
-      <input type="password" className="form-control" name="input_password" {...register('password')}/>
-      <p className='text-danger'>{errors.password && errors.password.message }</p>
-      <label className="form-label">Confirm Password: </label>
-      <input type="password" className="form-control" {...register('confirm_password')}/>
-      <p className='text-danger'>{errors.confirm_password && errors.confirm_password.message }</p>
-      <button type="submit" className='btn btn-success'>Send</button>
-    </form>
+    <div className="app-bg screen-center">
+      <div className="container">
+        <div className="auth-card card soft">
+          <h2 className="title">Crear cuenta</h2>
+
+          {authError && <div className="alert error">{authError}</div>}
+
+          <form onSubmit={handleSubmit(onSubmit)} noValidate>
+            <div className="form-group">
+              <label htmlFor="email">Correo electrónico</label>
+              <input
+                id="email"
+                type="email"
+                className={`input ${errors.email ? 'invalid' : ''}`}
+                placeholder="nombre@dominio.com"
+                autoComplete="email"
+                {...register('email')}
+              />
+              {errors.email && <p className="field-error">{errors.email.message}</p>}
+            </div>
+
+            <div className="grid grid-2-sm">
+              <div className="form-group">
+                <label htmlFor="password">Contraseña</label>
+                <input
+                  id="password"
+                  type="password"
+                  className={`input ${errors.password ? 'invalid' : ''}`}
+                  placeholder="••••••••"
+                  autoComplete="new-password"
+                  {...register('password')}
+                />
+                {errors.password && <p className="field-error">{errors.password.message}</p>}
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="confirm_password">Confirmar contraseña</label>
+                <input
+                  id="confirm_password"
+                  type="password"
+                  className={`input ${errors.confirm_password ? 'invalid' : ''}`}
+                  placeholder="••••••••"
+                  autoComplete="new-password"
+                  {...register('confirm_password')}
+                />
+                {errors.confirm_password && <p className="field-error">{errors.confirm_password.message}</p>}
+              </div>
+            </div>
+
+            <button className="btn primary w-100" disabled={isSubmitting}>
+              {isSubmitting ? 'Creando…' : 'Registrarme'}
+            </button>
+          </form>
+
+          <p className="small center" style={{ marginTop: 12 }}>
+            <span className="muted">¿Ya tienes cuenta?</span>{' '}
+            <Link to="/login">Inicia sesión</Link>
+          </p>
+        </div>
+      </div>
     </div>
   )
 }
