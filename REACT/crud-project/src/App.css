@@ -1,0 +1,94 @@
+:root{
+  --bg:#F6F7FB; --panel:#FFFFFF; --text:#0F1222; --muted:#6B7280;
+  --primary:#7C3AED; --primary-600:#6D28D9; --primary-200:#E9D5FF;
+  --accent:#22D3EE; --green:#10B981; --amber:#F59E0B; --red:#EF4444;
+  --radius:18px;
+  --shadow-1:0 10px 30px rgba(17,24,39,.08);
+  --shadow-2:0 18px 50px rgba(124,58,237,.18);
+  --border-soft:rgba(124,58,237,.10);
+  --border-soft-2:rgba(124,58,237,.12);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}
+
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{
+  margin:0;background:
+    radial-gradient(60% 50% at 20% 0%, #ede9fe 0, transparent 60%),
+    radial-gradient(50% 40% at 90% 0%, #cffafe 0, transparent 55%),
+    var(--bg);
+  color:var(--text);
+}
+
+/* Centro del layout */
+.app{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;   /* centro horizontal */
+  align-items:flex-start;   /* usa center si quieres centro vertical */
+}
+.shell{
+  width:820px;
+  max-width:96vw;
+  margin:48px 0;            /* no auto; el centrado lo hace .app */
+}
+
+.app-header{display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.title{font-size:28px;font-weight:800;letter-spacing:.2px}
+
+.panels-grid{display:grid;gap:16px;width:100%}
+.panel-card{
+  background:var(--panel);border-radius:var(--radius);box-shadow:var(--shadow-1);
+  padding:16px;border:1px solid var(--border-soft)
+}
+.panel-bar{margin:0 0 12px;font-size:16px;font-weight:700}
+
+/* Formulario Soft UI */
+.su-form{display:grid;grid-template-columns:2fr 3fr auto;gap:10px}
+.su-input{
+  width:100%; color:var(--text); background:#fff;
+  border:1px solid var(--border-soft-2); border-radius:14px; padding:12px 14px;
+  outline:none; box-shadow:inset 0 2px 8px rgba(17,24,39,.05);
+}
+.su-input:focus{border-color:var(--primary-600)}
+.su-input::placeholder{color:var(--muted);opacity:1}
+.su-btn{
+  border:none; border-radius:14px; padding:12px 16px; cursor:pointer; font-weight:600;
+  background:linear-gradient(180deg,var(--primary),var(--primary-600));
+  color:#fff; box-shadow:var(--shadow-2);
+}
+@media (max-width:720px){ .su-form{grid-template-columns:1fr} }
+
+.muted{color:var(--muted)}
+.error{color:var(--red);margin-top:8px}
+
+/* Lista apilada una debajo de otra */
+.task-list{
+  list-style:none; margin:0; padding:0;
+  display:flex; flex-direction:column; gap:10px;
+}
+.task-card{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  background:#fff; border:1px solid var(--border-soft); border-radius:16px;
+  padding:12px 14px; box-shadow:var(--shadow-1)
+}
+.task-card.done{opacity:.85}
+.task-main{display:flex; align-items:center; gap:12px; flex:1}
+.task-texts{display:flex; flex-direction:column}
+.task-title{font-weight:700}
+.task-desc{font-size:13px; color:var(--muted)}
+.edit-fields{display:grid; grid-template-columns:1fr 1fr; gap:8px; width:100%}
+.task-actions{display:flex; gap:8px}
+
+.task-id{
+  font-weight:700; font-size:12px;
+  padding:4px 8px; border-radius:9999px;
+  background:var(--primary-200); color:var(--primary-600);
+}
+
+.btn{
+  border:none; border-radius:14px; padding:10px 14px; font-weight:600; cursor:pointer;
+  background:#fff; color:var(--primary-600); border:1px solid var(--border-soft)
+}
+.btn.ghost{background:#fff}
+.btn.danger{background:linear-gradient(180deg,var(--red),#b91c1c); color:#fff; border:none}
