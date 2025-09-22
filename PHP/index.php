@@ -105,4 +105,24 @@ switch($dia){
 $mensaje = ($edad < 18) ? "Eres menor de edad" : "Eres mayor de edad";
 echo $mensaje."\n";
 
+//Estructuras repetitivas
+// While
+$contador = 0;
+while($contador < 5){
+    echo "Contador: {$contador}\n";
+    $contador++;
+}
+
+//Do While 
+$contador = 0;
+do{
+    echo "Contador Do While: {$contador}\n";
+    $contador++;
+} while($contador < 5);
+
+//for
+for($i = 0; $i < 5; $i++){
+    echo "Contador For: {$i}\n";
+}
+
 ?>
